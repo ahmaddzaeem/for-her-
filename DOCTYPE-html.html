@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      text-align: center;
+      background-color: #000;
+    }
+
+    .bg {
+      background-image: url('https://cdn.pixabay.com/photo/2016/11/29/03/53/roses-1867444_960_720.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      position: relative;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.5);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    #countdown {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    #message {
+      font-size: 32px;
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .signature {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 14px;
+      color: #ffd;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Hey love, something's coming...</h1>
+      <div id="countdown"></div>
+      <div id="message">You're my whole world 🌍<br>Swipe up when you see me 😘</div>
+    </div>
+    <div class="signature">Made with 💖 by Your One & Only</div>
+  </div>
+
+  <!-- Background music (replace src with your own mp3 link if you want) -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/26/audio_4a0fc11f29.mp3?filename=forever-love-14351.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Countdown target: today at 10 PM (adjust if needed)
+    const targetTime = new Date();
+    targetTime.setHours(22, 0, 0, 0);
+
+    const countdownEl = document.getElementById("countdown");
+    const messageEl = document.getElementById("message");
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetTime - now;
+
+      if (distance <= 0) {
+        clearInterval(interval);
+        countdownEl.style.display = "none";
+        messageEl.style.display = "block";
+      } else {
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownEl.innerHTML = `${hours}H ${minutes}M ${seconds}S`;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
